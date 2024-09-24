@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# Mental Health Support Chatbot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **mental health support system** designed to aid individuals in understanding and validating their feelings. The chatbot is not intended to replace professional therapy or counseling but aims to provide a space where users can express themselves, get validation, and gain insights into their emotional state. It acts as a mediator to help people feel heard and acknowledged, while ensuring a safe and supportive interaction.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+- [Introduction](#introduction)
+- [Technologies Used](#technologies-used)
+- [Features](#features)
+- [Architecture Overview](#architecture-overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Ethical Considerations](#ethical-considerations)
+- [Contributing](#contributing)
+- [License](#license)
 
-### `npm start`
+## Introduction
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The **Mental Health Support Chatbot** is built using advanced Natural Language Processing (NLP) models fine-tuned on mental health conversation data. It provides empathetic responses and aims to foster a supportive environment for users who may want to express their emotions.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Key points:
 
-### `npm test`
+- **Purpose**: Aid users in expressing and validating their emotions.
+- **Disclaimer**: The chatbot is not a replacement for professional mental health services, but serves as an aid in emotional understanding and validation.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- **Frontend**: React + Tailwind CSS
+- **Backend**: FastAPI (Python)
+- **NLP Model**: Hugging Face's `DialoGPT` (or another transformer model fine-tuned for mental health dialogues)
+- **Deployment**: FastAPI for backend API, React for frontend interface
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Emotionally Aware Conversations**: Provides responses that are empathetic and contextually aware.
+- **Continued Conversations**: The chatbot keeps track of the conversation context to ensure responses are meaningful across multiple interactions.
+- **Interactive Frontend**: Built using React and Tailwind for an intuitive and user-friendly interface.
+- **API Integration**: The chatbot is powered by a FastAPI backend that handles prompts and responses.
+- **Non-judgmental Support**: The bot focuses on validation and understanding without offering medical advice or diagnoses.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Architecture Overview
 
-### `npm run eject`
+1. **Frontend**:
+   - React + Tailwind for the user interface.
+   - Chat interface allows users to type their prompts and get responses in real-time.
+2. **Backend**:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   - FastAPI to handle incoming requests and communicate with the Hugging Face model.
+   - The model processes the input text and generates a response based on the current and previous conversation context.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **NLP Model**:
+   - Hugging Face transformer models (e.g., `DialoGPT` or a fine-tuned BERT/GPT model) handle text generation.
+   - Continued conversation support by tracking previous exchanges.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### System Flow:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- User sends a message → Frontend forwards it to the backend → Backend passes it to the NLP model → NLP model generates a response → Backend returns the response to the frontend → Frontend displays the response to the user.
 
-## Learn More
+## Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Python 3.8+
+- Node.js and npm
+- Hugging Face transformers library
+- FastAPI
+- Tailwind CSS
 
-### Code Splitting
+### Clone the repository
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+git clone https://github.com/yourusername/mental-health-chatbot.git
+cd mental-health-chatbot
+```
 
-### Analyzing the Bundle Size
+### Backend Setup (FastAPI + Hugging Face)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Install Python dependencies:
 
-### Making a Progressive Web App
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Run the FastAPI server:
 
-### Advanced Configuration
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3. (Optional) Fine-tune the Hugging Face model:
+   - You can either use a pre-trained conversational model or fine-tune your own on a mental health conversation dataset.
 
-### Deployment
+### Frontend Setup (React + Tailwind)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Install frontend dependencies:
 
-### `npm run build` fails to minify
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. Start the React development server:
+   ```bash
+   npm start
+   ```
+
+### API Integration
+
+- Make sure the FastAPI server is running on `http://localhost:8000`, and the React app will communicate with it via `POST` requests to the `/chat` endpoint.
+
+## Usage
+
+1. **Starting the App**:
+
+   - Open the React frontend at `http://localhost:3000`.
+   - Type your prompt into the chat input field and submit it.
+   - The chatbot will respond in real-time based on the conversation context.
+
+2. **Backend**:
+   - The backend handles the user input by passing it to the Hugging Face model and responding with generated text.
+   - The chat maintains a conversation history to ensure context-aware responses.
+
+## Ethical Considerations
+
+- This chatbot is **not a replacement** for professional mental health services.
+- It is important to make users aware of the limitations of the chatbot and provide resources for professional help when necessary.
+- We recommend adding a disclaimer stating that the responses are not professional advice and suggest users seek professional mental health support for critical issues.
+
+## Contributing
+
+Contributions are welcome! If you would like to contribute to this project:
+
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Submit a pull request for review.
+
+Please ensure all changes align with the project's goal of providing empathetic, non-judgmental support.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
