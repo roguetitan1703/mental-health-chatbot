@@ -24,4 +24,5 @@ yarn-error.log*
 
 .vscode
 backend/.venv
+backend/app/saved_models
 frontend/node_modules

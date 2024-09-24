@@ -1,10 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-import { Home } from "./pages";
+import { Home, Index } from "./pages";
 function App() {
   return (
     <div>
+      <Index />
       <Home />
     </div>
   );
