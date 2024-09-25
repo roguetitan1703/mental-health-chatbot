@@ -22,21 +22,6 @@ const Home = () => {
     }
   }, [showError]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setMessages([...messages, { role: "user", content: userInput }]);
-    try {
-      const response = await axios.post("/chat", { message: userInput });
-      setMessages([
-        ...messages,
-        { role: "assistant", content: response.data.response },
-      ]);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-    setUserInput("");
-  };
-
   // Making a better getResponse function
   const getResponse = async () => {
     setLoading(true);
@@ -54,8 +39,9 @@ const Home = () => {
             { role: "assistant", content: response.data.response },
           ]);
         } else {
-          console.log("Error:", response.data.error);
-          setErrMessage(response.data.error);
+          // Extract the error detail correctly
+          console.log("Error:", response.data.detail);
+          setErrMessage(response.data.detail);
           setShowError(true);
         }
       } else {
@@ -64,13 +50,31 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrMessage("There was an error: ", error);
+      setErrMessage("There was an error. Please try again later.");
       setShowError(true);
     } finally {
       setLoading(false);
       setUserInput("");
     }
   };
+
+  const showMessages = messages.map((message, index) => (
+    <div
+      key={index}
+      className={`flex flex-row items-end w-full ${
+        message.role === "user" ? "justify-end" : "justify-start"
+      }`}
+    >
+      <div
+        className={`p-4 text-white rounded-lg ${
+          message.role === "user" ? "bg-[#1e1f20]" : "bg-[#1e1f20]"
+        }`}
+      >
+        {message.content}
+      </div>
+    </div>
+  ));
+
   return (
     <div className="h-screen bg-[#131314]" id="home">
       <div className="relative mx-auto max-w-screen-xl px-4 py-12 flex flex-col sm:px-6 lg:h-screen lg:items-center lg:px-8">
@@ -93,22 +97,17 @@ const Home = () => {
         </div>
         {/* Making a message container which has the user's prompt and the model's repsonse, no history storing or displaying for now */}
         <div id="messages-container" className="w-full mt-12">
-          {messages.map((message, index) => (
+          {showMessages}
+          {loading && (
             <div
               key={index}
-              className={`flex flex-row items-center w-full my-4 ${
-                message.role === "user" ? "justify-end" : "justify-start"
-              }`}
+              className="flex flex-row items-end w-full justify-start"
             >
-              <div
-                className={`p-4 text-white rounded-lg ${
-                  message.role === "user" ? "bg-[#1e1f20]" : "bg-[#1e1f20]"
-                }`}
-              >
-                {message.content}
+              <div className="p-4 text-white rounded-lg bg-[#1e1f20]">
+                Please wait, generating response...
               </div>
             </div>
-          ))}
+          )}
         </div>
         <footer className="w-full absolute mx-auto px-6 py-4 bottom-0 flex flex-col justify-center items-center">
           <div className="w-full flex flex-row justify-center items-center mb-10 space-x-4">
