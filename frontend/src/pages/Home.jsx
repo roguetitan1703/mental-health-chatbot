@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
@@ -202,7 +203,7 @@ const Home = () => {
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex flex-col items-start">
             <span className="text-5xl font-extrabold text-transparent bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-400 bg-clip-text bg-300% animate-gradient">
-              Cassandra
+              <Link to = "/">Cassandra</Link>
             </span>
             <span className="text-white/80 ml-4 lowercase font-bold">
               the Mental Health Chatbot
