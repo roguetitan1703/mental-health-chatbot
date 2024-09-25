@@ -2,11 +2,21 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from models import TinyLlamaModel
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
 
 # Create the FastAPI app
 app = FastAPI()
+
+# Allow requests from your React frontend's origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Replace with your React frontend's origin
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # Initialize the chatbot model
 chatbot_model = TinyLlamaModel()
