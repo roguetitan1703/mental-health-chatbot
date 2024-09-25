@@ -10,7 +10,9 @@ body {
     @apply font-heading;  /* Use Inconsolata for headings */
   }
 
-
+  * {
+    scroll-behavior: smooth;
+  }
 
 @layer utilities {
   .text-balance {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Index = () => {
   return (
@@ -16,7 +17,7 @@ const Index = () => {
         {/* start a chat button */}
         <div className="group mt-12 flex justify-center items-center ring-white ring-1 hover:ring-0 rounded-md from-cyan-400 via-pink-500 to-purple-400 bg-300% animate-gradient bg-none hover:bg-gradient-to-r tansition-all duration-150 ease-in-out">
           <button className="text-xl py-3 px-6 rounded-md group-hover:bg-none group-hover:text-black bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-400 bg-300% animate-gradient">
-            <a href="#home">Start a chat</a>
+            <Link to = "/home">Start a chat</Link>
           </button>
         </div>
 
