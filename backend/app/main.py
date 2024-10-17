@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from models import TinyLlamaModel
+from models import TinyLlamaChatbot
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -19,7 +19,7 @@ app.add_middleware(
 
 
 # Initialize the chatbot model
-chatbot_model = TinyLlamaModel()
+chatbot_model = TinyLlamaChatbot()
 
 # Define a data model for the incoming request
 class RequestBody(BaseModel):
@@ -45,6 +45,7 @@ async def get_response(body: RequestBody):
 
     except Exception as e:
         # Return a 500 status code for any other server error
+        print(f"Error generating response: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error generating response: {str(e)}")
 
 if __name__ == "__main__":

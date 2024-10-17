@@ -60,7 +60,7 @@ const Home = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setErrMessage("There was an error. Please try again later.");
+      setErrMessage("There was an error. Please try again later.: ", error);
       setShowError(true);
     } finally {
       setLoading(false);
@@ -77,12 +77,12 @@ const Home = () => {
   const showMessages = messages.map((message, index) => (
     <div
       key={index}
-      className={`flex flex-row items-end w-full ${
+      className={`flex flex-row items-end w-full my-4 ${
         message.role === "user" ? "justify-end" : "justify-start"
       }`}
     >
       <div
-        className={`p-4 text-white rounded-lg ${
+        className={`p-4 text-white rounded-lg max-w-xl text-wrap ${
           message.role === "user" ? "bg-[#1e1f20]" : "bg-[#1e1f20]"
         }`}
       >
@@ -202,7 +202,7 @@ const Home = () => {
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex flex-col items-start">
             <span className="text-5xl font-extrabold text-transparent bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-400 bg-clip-text bg-300% animate-gradient">
-              Cassandra
+              BayMax
             </span>
             <span className="text-white/80 ml-4 lowercase font-bold">
               the Mental Health Chatbot
@@ -218,7 +218,10 @@ const Home = () => {
           )}
         </div>
         {/* Making a message container which has the user's prompt and the model's repsonse, no history storing or displaying for now */}
-        <div id="messages-container" className="w-full h-full mt-12">
+        <div
+          id="messages-container"
+          className="w-full h-[700px] mt-12 overflow-scroll no-scrollbar"
+        >
           {loading ? (
             <div className="flex flex-row items-end w-full justify-start">
               <div className="p-4 text-white rounded-lg bg-[#1e1f20]">

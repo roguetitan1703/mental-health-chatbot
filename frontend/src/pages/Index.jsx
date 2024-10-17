@@ -7,7 +7,7 @@ const Index = () => {
         <div className="flex flex-col items-start w-full">
           <h1 className="text-9xl text-gray-50/90 font-extrabold">
             <span className="text-transparent bg-gradient-to-r from-cyan-400 via-pink-500 to-purple-400 bg-clip-text bg-300% animate-gradient">
-              Cassandra
+              BayMax
             </span>
             , The mental health support chatbot.
           </h1>
